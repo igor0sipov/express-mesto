@@ -1,16 +1,12 @@
 const usersRouter = require('express').Router();
-const { users } = require('../data/users.json');
+const { readUsers } = require('../data/read-users');
+
+usersRouter.get('/users', (req, res) => {
+  readUsers(req, res, undefined);
+});
 
 usersRouter.get('/users/:id', (req, res) => {
-  const requestedUser = users.filter((user) => user._id === req.params.id);
-  if (!requestedUser) {
-    res.status(404);
-    res.send({
-      message: 'Такого пользователя не существует',
-    });
-  } else {
-    res.send(requestedUser);
-  }
+  readUsers(req, res, req.params.id);
 });
 
 module.exports = usersRouter;
