@@ -9,10 +9,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', cards);
 app.use('/', users);
-app.use('/:resource', (req, res) => {
-  if (req.params.resource !== 'cards' || req.params.resource !== 'users') {
-    res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
-  }
+app.use('*', (req, res) => {
+  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
 app.listen(PORT, () => {
