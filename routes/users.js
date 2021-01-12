@@ -9,11 +9,8 @@ usersRouter.get('/users', (req, res) => {
       res.send(users);
     })
     .catch((err) => {
-      console.error(err);
       res.status(500).send({
-        code: '500',
-        text: 'Internal Server Error',
-        details: err,
+        message: '500: Internal Server Error',
       });
     });
 });
@@ -29,11 +26,8 @@ usersRouter.get('/users/:id', (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
       res.status(500).send({
-        code: '500',
-        text: 'Internal Server Error',
-        details: err,
+        message: '500: Internal Server Error',
       });
     });
 });
