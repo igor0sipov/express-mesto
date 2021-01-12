@@ -3,16 +3,17 @@ const { getData } = require('../utils/get-data');
 
 const filePath = 'data/cards.json';
 
-const handleError = (err, res) => {
-  res.status(404).send({
-    message: err,
-  });
-};
-
 cardsRouter.get('/cards', (req, res) => {
   getData(filePath)
     .then((cards) => res.send(cards))
-    .catch((err) => handleError(err, res));
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({
+        code: '500',
+        text: 'Internal Server Error',
+        details: err,
+      });
+    });
 });
 
 module.exports = cardsRouter;

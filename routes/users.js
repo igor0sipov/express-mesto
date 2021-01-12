@@ -3,18 +3,19 @@ const { getData } = require('../utils/get-data');
 
 const filePath = 'data/users.json';
 
-const handleError = (err, res) => {
-  res.status(404).send({
-    message: err,
-  });
-};
-
 usersRouter.get('/users', (req, res) => {
   getData(filePath)
     .then((users) => {
       res.send(users);
     })
-    .catch((err) => handleError(err, res));
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({
+        code: '500',
+        text: 'Internal Server Error',
+        details: err,
+      });
+    });
 });
 
 usersRouter.get('/users/:id', (req, res) => {
@@ -27,7 +28,14 @@ usersRouter.get('/users/:id', (req, res) => {
         res.status(404).send({ message: 'Нет пользователя с таким id' });
       }
     })
-    .catch((err) => handleError(err, res));
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send({
+        code: '500',
+        text: 'Internal Server Error',
+        details: err,
+      });
+    });
 });
 
 module.exports = usersRouter;
