@@ -1,24 +1,20 @@
 const cardsRouter = require('express').Router();
-const { getData } = require('../utils/get-data');
+const {
+  getAllCards,
+  addCard,
+  deleteCard,
+  like,
+  deleteLike,
+} = require('../controllers/cards');
 
-const filePath = 'data/cards.json';
+cardsRouter.get('/cards', getAllCards);
 
-cardsRouter.get('/cards', (req, res) => {
-  getData(filePath)
-    .then((cards) => res.send(cards))
-    .catch((err) => {
-      res.status(500).send({
-        message: '500: Internal Server Error',
-      });
-    });
-});
-// Что вы подразумеваете под "сообщением об ошибке" в данном случае?
-// Просто строку со статусом ошибки и описанием? или объект err который передается в catch?
-// Что-то другое?
-// Если я не угадал то, что вы подразумеваете, я надеюсь, что это не будет ошибкой
-// Я способен в значение поля "message" подставить что-то другое.
+cardsRouter.post('/cards', addCard);
 
-// вы могли бы объяснить почему это должно быть принципиально единственное поле message?
-// Какой-то стандарт? Почему нельзя как-то иначе?
+cardsRouter.delete('/cards/:cardId', deleteCard);
+
+cardsRouter.put('/cards/:cardId/likes', like);
+
+cardsRouter.delete('/cards/:cardId/likes', deleteLike);
 
 module.exports = cardsRouter;
