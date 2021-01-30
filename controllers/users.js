@@ -19,7 +19,7 @@ module.exports.getSpecificUser = (req, res) => {
       res.send(user);
     })
     .catch(() => {
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
+      res.status(400).send({ message: 'id введен некорректно' });
     });
 };
 

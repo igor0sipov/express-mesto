@@ -45,7 +45,7 @@ module.exports.deleteCard = (req, res) => {
       res.send(card);
     })
     .catch(() => {
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
+      res.status(400).send({ message: 'id введен некорректно' });
     });
 };
 
@@ -63,7 +63,7 @@ module.exports.like = (req, res) => {
     })
 
     .catch(() => {
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
+      res.status(400).send({ message: 'id введен некорректно' });
     });
 };
 
@@ -80,6 +80,6 @@ module.exports.deleteLike = (req, res) => {
       res.send(card);
     })
     .catch(() => {
-      res.status(500).send({ message: 'На сервере произошла ошибка' });
+      res.status(400).send({ message: 'id введен некорректно' });
     });
 };
