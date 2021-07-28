@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const cards = require('./routes/cards.js');
 const users = require('./routes/users.js');
@@ -11,7 +12,10 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 });
+
+app.use(cors());
 
 app.use(express.json());
 
